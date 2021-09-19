@@ -59,11 +59,8 @@ public class Questions {
     }
 
     public static boolean checkAnswer(String optionSelected, int round, int randomNumber){
-        if(optionSelected == SOLUCIONES[round][randomNumber]){
-            return true;
-        }else{
-            return false;
-        }
+        boolean check = optionSelected.equals(SOLUCIONES[round-1][randomNumber]);
+        return check;
     }
 
 }

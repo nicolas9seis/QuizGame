@@ -14,64 +14,101 @@ public class Round {
 
     public static void startRound() {
         int randomNumber = random.nextInt(5);
-        System.out.println("-----> Ronda "+ronda);
-        System.out.println("-----> Premio "+premio);
-        Questions.randomQuestion(ronda,randomNumber);
+        System.out.println("-----> Ronda " + ronda);
+        System.out.println("-----> Premio " + premio);
+        Questions.randomQuestion(ronda, randomNumber);
         System.out.println("----->Ingrese la opción adecuada: ");
         answerSelectionMenu(randomNumber);
 
     }
-    public static void answerSelectionMenu(int randomNumberQuestion){
 
-        do {
+    public static void answerSelectionMenu(int randomNumberQuestion) {
+        boolean enJuego = true;
+
+        while(enJuego == true){
+            Scanner input = new Scanner(System.in);
+            optionSelected = input.nextLine().toUpperCase(Locale.ROOT);
+            boolean correctOrIncorrect = Questions.checkAnswer(optionSelected, ronda, randomNumberQuestion);
+            if(correctOrIncorrect == true){
+                System.out.println("¡Felicitaciones! Escogio la respuesta correcta");
+                ronda++;
+                premio += 100;
+                startRound();
+            }else{
+                System.out.println("¡Perdiste! La respuesta es incorrecta. ");
+                enJuego = false;
+            }
+        }
+
+
+
+
+        /*
+        while (enJuego == true) {
             try {//to check if the value is valid
                 Scanner input = new Scanner(System.in);
                 optionSelected = input.nextLine().toUpperCase(Locale.ROOT);
                 switch (optionSelected) {
                     case "A":
-                        boolean correctOrIncorrect = Questions.checkAnswer(optionSelected,ronda,randomNumberQuestion);//The function checks if the answer was correct
-                        if(correctOrIncorrect == true){//if true starts a new round
+                        boolean correctOrIncorrect = Questions.checkAnswer(optionSelected, ronda, randomNumberQuestion);//The function checks if the answer was correct
+                        if (correctOrIncorrect == true) {//if true starts a new round
                             System.out.println("¡Felicitaciones! Escogio la respuesta correcta");
                             ronda++;
-                            premio +=100;
+                            premio += 100;
                             startRound();
-                        }else{
+                        } else {
                             System.out.println("¡Perdiste! La respuesta es incorrecta. ");
+                            enJuego = false;
                         }
 
                     case "B":
-                        if(correctOrIncorrect == true){//if true starts a new round
+                        boolean correctOrIncorrectB = Questions.checkAnswer(optionSelected, ronda, randomNumberQuestion);//The function checks if the answer was correct
+                        if (correctOrIncorrectB == true) {//if true starts a new round
                             System.out.println("¡Felicitaciones! Escogio la respuesta correcta");
                             ronda++;
-                            premio +=100;
+                            premio += 100;
                             startRound();
+                        } else {
+                            System.out.println("¡Perdiste! La respuesta es incorrecta. ");
+                            enJuego = false;
                         }
 
                     case "C":
-                        if(correctOrIncorrect == true){//if true starts a new round
+                        boolean correctOrIncorrectC = Questions.checkAnswer(optionSelected, ronda, randomNumberQuestion);//The function checks if the answer was correct
+                        if (correctOrIncorrectC == true) {//if true starts a new round
                             System.out.println("¡Felicitaciones! Escogio la respuesta correcta");
                             ronda++;
-                            premio +=100;
+                            premio += 100;
                             startRound();
+                        } else {
+                            System.out.println("¡Perdiste! La respuesta es incorrecta. ");
+                            enJuego = false;
                         }
 
                     case "D":
-                        if(correctOrIncorrect == true){//if true starts a new round
+                        boolean correctOrIncorrectD = Questions.checkAnswer(optionSelected, ronda, randomNumberQuestion);//The function checks if the answer was correct
+                        if (correctOrIncorrectD == true) {//if true starts a new round
                             System.out.println("¡Felicitaciones! Escogio la respuesta correcta");
                             ronda++;
-                            premio +=100;
+                            premio += 100;
                             startRound();
+                        } else {
+                            System.out.println("¡Perdiste! La respuesta es incorrecta. ");
+                            enJuego = false;
                         }
+                    default:
+                        System.out.println("Opción incorrecta. Por favor digite A,B,C o D para ingresar su respuesta: ");
 
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("Opción incorrecta. Por favor digite A,B,C o D para ingresar su respuesta: ");
                 answerSelectionMenu(randomNumberQuestion);
-            }finally {
+            } finally {
                 System.out.println("Opción incorrecta. Por favor digite A,B,C o D para ingresar su respuesta: ");
                 answerSelectionMenu(randomNumberQuestion);
             }
-        }while (optionSelected != "NICOLAS");
 
+
+        }*/
     }
 }
