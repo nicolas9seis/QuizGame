@@ -1,3 +1,4 @@
+import java.nio.file.FileAlreadyExistsException;
 import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
@@ -13,40 +14,20 @@ public class Round {
     }
 
     public static void startRound() {
-        int randomNumber = random.nextInt(5);
-        System.out.println("----------------------------------------------------------------------");
-        System.out.println("-----> Ronda " + ronda);
-        System.out.println("-----> Premio $ " + premio);
-        System.out.println("----------------------------------------------------------------------");
-        Questions.randomQuestion(ronda, randomNumber);
-        System.out.println("----------------------------------------------------------------------");
-        System.out.println("----->Ingrese la opción adecuada: ");
-        answerSelectionMenu(randomNumber);
+            int randomNumber = random.nextInt(5);
+            System.out.println("----------------------------------------------------------------------");
+            System.out.println("-----> Ronda " + ronda);
+            System.out.println("-----> Premio $ " + premio);
+            System.out.println("----------------------------------------------------------------------");
+            Questions.randomQuestion(ronda, randomNumber);
+            System.out.println("----------------------------------------------------------------------");
+            System.out.println("----->Ingrese la opción adecuada: ");
+            answerSelectionMenu(randomNumber);
 
     }
 
     public static void answerSelectionMenu(int randomNumberQuestion) {
         boolean enJuego = true;
-
-
-                            /*
-                            This block of code was used to create the logic of the round
-                            while(enJuego == true){
-                                Scanner input = new Scanner(System.in);
-                                optionSelected = input.nextLine().toUpperCase(Locale.ROOT);
-                                boolean correctOrIncorrect = Questions.checkAnswer(optionSelected, ronda, randomNumberQuestion);
-                                if(correctOrIncorrect == true){
-                                    System.out.println("¡Felicitaciones! Escogio la respuesta correcta");
-                                    ronda++;
-                                    premio += 100;
-                                    startRound();
-                                }else{
-                                    System.out.println("¡Perdiste! La respuesta es incorrecta. ");
-                                    enJuego = false;
-                                }
-                            }
-*/
-
 
         while (enJuego == true) {
             try {//to check if the value is valid
@@ -87,6 +68,8 @@ public class Round {
             System.out.println("----------------------------------------------------------------------");
             System.out.println("¡Felicitaciones! Escogio la respuesta correcta");
             System.out.println("----------------------------------------------------------------------");
+            ronda++;
+            premio += 100;
             continueGame();
 
         } else {
@@ -99,20 +82,24 @@ public class Round {
     public static void continueGame(){
 
         try{
-            System.out.println("¿Desea continuar jugando?");
-            System.out.println("Recuerde que si se retira ahora podra conservar el premio. ");
-            System.out.println("Digite S para seguir jugando o R para retirarse: ");
-            Scanner input = new Scanner(System.in);
-            optionSelected = input.nextLine().toUpperCase(Locale.ROOT);
+            if(ronda <= 5) {
+                System.out.println("¿Desea continuar jugando?");
+                System.out.println("Recuerde que si se retira ahora podra conservar el premio. ");
+                System.out.println("Digite S para seguir jugando o R para retirarse: ");
+                Scanner input = new Scanner(System.in);
+                optionSelected = input.nextLine().toUpperCase(Locale.ROOT);
 
-            switch (optionSelected){
-                case "S":
-                    ronda++;
-                    premio += 100;
-                    startRound();
-                case "R":
-                    premio += 100;
-                    loseWindow();
+                switch (optionSelected) {
+                    case "S":
+                        startRound();
+                    case "R":
+                        loseWindow();
+                }
+            }else if (ronda == 6){
+                System.out.println("----------------------------------------------------------------------");
+                System.out.println("¡FELICIDADES GANÓ LA TRIVIA SOFKA!");
+                System.out.println("----------------------------------------------------------------------");
+                loseWindow();
             }
 
         } catch (Exception e) {
