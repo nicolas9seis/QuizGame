@@ -40,7 +40,7 @@ public class GameMenu {
                     case 2:
                         System.out.println("Carganado sección de jugadores......");
                         response = 0;
-                        System.out.println("----------------------------------------------------------------------");
+                       showPlayers();
                         break;
                 }
             }
@@ -51,4 +51,14 @@ public class GameMenu {
         } while (response != 0);
     }
 
+    public static void showPlayers(){
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("----------------Bienvenido a la sección de jugadores------------------");
+        System.out.println("En esta sección encontrara la lista historia de jugadores de la trivia");
+        System.out.println("----------------------------------------------------------------------");
+        DataMagane.readTextFile("Players.txt");
+        System.out.println("----------------------------------------------------------------------");
+        Round.gameMenuLoseWindowSelecction();
+
+    }
 }

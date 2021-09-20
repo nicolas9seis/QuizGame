@@ -17,7 +17,7 @@ public class Round {
             int randomNumber = random.nextInt(5);
             System.out.println("----------------------------------------------------------------------");
             System.out.println("-----> Ronda " + ronda);
-            System.out.println("-----> Premio $ " + premio);
+            System.out.println("-----> Premio acumulado: $ " + premio);
             System.out.println("----------------------------------------------------------------------");
             Questions.randomQuestion(ronda, randomNumber);
             System.out.println("----------------------------------------------------------------------");
@@ -120,14 +120,16 @@ public class Round {
             String name = input.nextLine();
             System.out.println("----------------------------------------------------------------------");
             System.out.println("----->Su nombre es " + name + " y su premio es $" + premio );
+            String userToSave = "-----> Nombre: " + name + ". "+ "Premio obtenido: $ " + premio + ".";
+            DataMagane.writeTextFile("Players.txt",userToSave);
             System.out.println("----------------------------------------------------------------------");
-            System.out.println("Presione la tecla H para volver al menú principal. ");
-            gameMenuLoseWindowSelecction();
+                        gameMenuLoseWindowSelecction();
 
     }
 
     public static void gameMenuLoseWindowSelecction(){
         try{
+            System.out.println("Presione la tecla H para volver al menú principal. ");
             Scanner input = new Scanner(System.in);
             String menu = input.nextLine().toUpperCase(Locale.ROOT);
             String menuOption = "H";
