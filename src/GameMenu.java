@@ -34,7 +34,6 @@ public class GameMenu {
                     case 1:
                         System.out.println("Iniciando juego......");
                         response = 0;
-                        System.out.println("----------------------------------------------------------------------");
                         Round.startRound();
                         break;
 

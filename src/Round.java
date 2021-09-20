@@ -14,10 +14,12 @@ public class Round {
 
     public static void startRound() {
         int randomNumber = random.nextInt(5);
-        System.out.println("The random number is " + randomNumber);
+        System.out.println("----------------------------------------------------------------------");
         System.out.println("-----> Ronda " + ronda);
-        System.out.println("-----> Premio " + premio);
+        System.out.println("-----> Premio $ " + premio);
+        System.out.println("----------------------------------------------------------------------");
         Questions.randomQuestion(ronda, randomNumber);
+        System.out.println("----------------------------------------------------------------------");
         System.out.println("----->Ingrese la opción adecuada: ");
         answerSelectionMenu(randomNumber);
 
@@ -82,6 +84,7 @@ public class Round {
 
     public static void ifTrueStartANewRound(boolean b){
         if (b == true) {//if true starts a new round
+            System.out.println("----------------------------------------------------------------------");
             System.out.println("¡Felicitaciones! Escogio la respuesta correcta");
             System.out.println("----------------------------------------------------------------------");
             continueGame();
@@ -108,8 +111,8 @@ public class Round {
                     premio += 100;
                     startRound();
                 case "R":
-                    System.out.println("Tu premio es $"+premio);
-                    break;
+                    premio += 100;
+                    loseWindow();
             }
 
         } catch (Exception e) {
@@ -122,10 +125,39 @@ public class Round {
     }
 
     public static void loseWindow(){
-        System.out.println("Fin del juego. \n Por favor ingrese su nombre para guardar su puntaje en la sección de participantes. ");
-        Scanner input = new Scanner(System.in);
-        String name = input.nextLine();
-        System.out.println("Su nombre es " + name + " y su premio es $" + premio );
-        System.out.println("Presione la tecla H para volver al menú principal. ");
+
+
+            System.out.println("----------------------------------------------------------------------");
+            System.out.println("Fin del juego. \n Por favor ingrese su nombre para guardar su puntaje en la sección de participantes. ");
+            Scanner input = new Scanner(System.in);
+            String name = input.nextLine();
+            System.out.println("----------------------------------------------------------------------");
+            System.out.println("----->Su nombre es " + name + " y su premio es $" + premio );
+            System.out.println("----------------------------------------------------------------------");
+            System.out.println("Presione la tecla H para volver al menú principal. ");
+            gameMenuLoseWindowSelecction();
+
+    }
+
+    public static void gameMenuLoseWindowSelecction(){
+        try{
+            Scanner input = new Scanner(System.in);
+            String menu = input.nextLine().toUpperCase(Locale.ROOT);
+            String menuOption = "H";
+            Boolean optionMenu = menu.equals(menuOption);
+            if(optionMenu){
+                GameMenu.showMenu();
+            }else{
+                System.out.println("Opción incorrecta. Por favor digite H para volver al menú principal. ");
+                gameMenuLoseWindowSelecction();
+            }
+
+        } catch (Exception e) {
+            System.out.println("Opción incorrecta. Por favor digite H para volver al menú principal. ");
+            gameMenuLoseWindowSelecction();
+        } finally {
+            System.out.println("Opción incorrecta. Por favor digite H para volver al menú principal.  ");
+            gameMenuLoseWindowSelecction();
+        }
     }
 }
